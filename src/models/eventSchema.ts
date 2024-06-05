@@ -8,8 +8,8 @@ const eventSchema = z.object({
     latitude: z.number(),
     longitude: z.number(),
   }),
-  startDate: z.string(),
-  endDate: z.string(),
+  startDate: z.date(),
+  endDate: z.date(),
   repetition: z.enum(REPETITION).default(''),
 });
 

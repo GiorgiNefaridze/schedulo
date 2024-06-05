@@ -27,7 +27,9 @@ const useBottomSheet = () => {
     console.log('Form data: ', data);
   });
 
-  useEffect(() => {}, [currentDate]);
+  useEffect(() => {
+    setMaxDate(currentDate);
+  }, [currentDate]);
 
   const handleOpenMap = () => {
     pickPlace({

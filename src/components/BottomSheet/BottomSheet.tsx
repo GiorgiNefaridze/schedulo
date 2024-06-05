@@ -24,7 +24,6 @@ const BottomSheet = () => {
     errors,
     snapPoints,
     isSelected,
-    setValue,
     setIsSelected,
     handleOpenMap,
     openedDate,
@@ -33,6 +32,7 @@ const BottomSheet = () => {
     setCurrentDate,
     maxDate,
     setMaxDate,
+    setValue,
   } = useBottomSheet();
 
   return (
@@ -66,6 +66,7 @@ const BottomSheet = () => {
               setOpenedDate={setOpenedDate}
               date={currentDate}
               setDate={setCurrentDate}
+              setValue={setValue}
             />
 
             <DateTimePicker
@@ -77,6 +78,7 @@ const BottomSheet = () => {
               setOpenedDate={setOpenedDate}
               date={maxDate}
               setDate={setMaxDate}
+              setValue={setValue}
             />
 
             <FormField
@@ -116,7 +118,12 @@ const BottomSheet = () => {
               )}
             />
 
-            <Pressable style={styles.button} onPress={submitForm}>
+            <Pressable
+              style={styles.button}
+              onPress={() => {
+                console.log('cliked');
+                submitForm();
+              }}>
               <Text style={styles.buttonText}>Submit</Text>
             </Pressable>
           </ScrollView>
