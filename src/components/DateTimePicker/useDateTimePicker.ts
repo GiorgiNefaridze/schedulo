@@ -1,24 +1,38 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, Dispatch, SetStateAction} from 'react';
+import {type UseFormSetValue} from 'react-hook-form';
 
-const useDateTimePicker = (name: string, openedDate: string) => {
+import {type EventSchema} from '../../models/eventSchema';
+
+const useDateTimePicker = (
+  name: keyof EventSchema,
+  openedDate: string,
+  setDate: Dispatch<SetStateAction<Date>>,
+  setValue: UseFormSetValue<EventSchema>,
+  date: Date,
+) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(name === openedDate);
+    if (name === 'endDate') {
+      setValue('endDate', date);
+    } else {
+      setValue('startDate', date);
+    }
   }, [name, openedDate]);
 
   const mode = name === 'endDate' ? 'time' : 'datetime';
-
-  const getTime = e => {
-    const date = new Date(e.nativeEvent.timestamp);
-    console.log(date.toLocaleString());
-  };
 
   const toggleVisibility = () => {
     setIsVisible(prev => !prev);
   };
 
-  return {isVisible, getTime, toggleVisibility, mode};
+  const handleConfirm = date => {
+    setDate(date);
+    setIsVisible(false);
+  };
+
+  return {isVisible, mode, toggleVisibility, handleConfirm};
 };
 
 export {useDateTimePicker};

@@ -1,11 +1,12 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 import {pickPlace} from 'react-native-place-picker';
 
 import {type EventSchema, eventSchema} from '../../models/eventSchema';
+import {defaultColors} from '../../constants/Colors';
 
-const snapPoints = ['80%', '95%', '100%'];
+const snapPoints = ['80%', '95%'];
 
 const useBottomSheet = () => {
   const [isSelected, setIsSelected] = useState('');
@@ -27,15 +28,11 @@ const useBottomSheet = () => {
     console.log('Form data: ', data);
   });
 
-  useEffect(() => {
-    setMaxDate(currentDate);
-  }, [currentDate]);
-
   const handleOpenMap = () => {
     pickPlace({
       enableUserLocation: true,
       enableGeocoding: true,
-      color: '#a3dd38',
+      color: defaultColors.light,
     })
       .then(res =>
         setValue('location', {

@@ -1,29 +1,25 @@
 import {View, Text} from 'react-native';
-import {Controller} from 'react-hook-form';
+import {type Control, Controller, type FieldError} from 'react-hook-form';
 
 import {useFormField} from './useFormField';
+import {type EventSchema} from '../../models/eventSchema';
 import styles from '../BottomSheet/styles';
 
 type FormFieldType = {
-  name: unknown;
-  control: unknown;
-  error: unknown;
+  name: keyof EventSchema;
+  control: Control<EventSchema>;
+  error: FieldError | undefined;
   Component: () => JSX.Element;
-  noLabel?: boolean;
+  hasLabel?: boolean;
 };
 
-const FormField = ({
-  control,
-  name,
-  error,
-  Component,
-  noLabel,
-}: FormFieldType) => {
+const FormField = (props: FormFieldType) => {
+  const {name, hasLabel, control, error, Component} = props;
   const {labelName, isError} = useFormField(name, error);
 
   return (
     <View style={styles.fieldBlock}>
-      {!noLabel && <Text style={styles.fieldBlockText}>{labelName}:</Text>}
+      {!hasLabel && <Text style={styles.fieldBlockText}>{labelName}:</Text>}
       <Controller
         name={name}
         control={control}

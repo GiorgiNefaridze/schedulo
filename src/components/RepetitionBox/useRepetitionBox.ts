@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 
-import {getFirstLetterUpper} from '../../utils/getFirstLetterUpper';
+import {getFirstUpperLetter} from '../../utils/getFirstUpperLetter';
 
 const useRepetitionBox = (itemName: string, isSelected: string) => {
   const [isChoosen, setIsChoosen] = useState(false);
@@ -9,7 +9,7 @@ const useRepetitionBox = (itemName: string, isSelected: string) => {
     setIsChoosen(itemName === isSelected);
   }, [isSelected, itemName]);
 
-  return {itemName: getFirstLetterUpper(itemName), isChoosen};
+  return {itemName: getFirstUpperLetter(itemName), isChoosen};
 };
 
 export {useRepetitionBox};

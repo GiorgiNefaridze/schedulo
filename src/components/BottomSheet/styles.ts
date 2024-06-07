@@ -1,5 +1,7 @@
 import {Dimensions, StyleSheet} from 'react-native';
 
+import {defaultColors} from '../../constants/Colors';
+
 const PADDING = 20;
 const {width} = Dimensions.get('screen');
 
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
   mapButton: {
     flexDirection: 'row',
     width: width - 2 * PADDING,
-    backgroundColor: '#a3dd38',
+    backgroundColor: defaultColors.light,
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
@@ -59,6 +61,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  repetitionSection: {
+    columnGap: 20,
+    height: 45,
+  },
+  dateIcon: {
+    padding: 10,
+    borderRadius: 10,
   },
 });
 

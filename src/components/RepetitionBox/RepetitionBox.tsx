@@ -3,15 +3,17 @@ import {UseFormSetValue} from 'react-hook-form';
 import {Text, Pressable} from 'react-native';
 
 import {useRepetitionBox} from './useRepetitionBox';
+import {defaultColors} from '../../constants/Colors';
 import {type Repetition} from '../../types/Repetition/Repetition';
+import {type EventSchema} from '../../models/eventSchema';
 
 import styles from './styles';
 
 type RepetitionBoxType = {
   item: Repetition;
-  isSelected: Repetition;
-  setIsSelected: Dispatch<SetStateAction<Repetition>>;
-  setValue: UseFormSetValue<{}>;
+  isSelected: string;
+  setIsSelected: Dispatch<SetStateAction<string>>;
+  setValue: UseFormSetValue<EventSchema>;
 };
 
 const RepetitionBox = ({
@@ -26,7 +28,7 @@ const RepetitionBox = ({
     <Pressable
       style={[
         styles.container,
-        {backgroundColor: isChoosen ? 'grey' : 'white'},
+        {backgroundColor: isChoosen ? defaultColors.light : 'white'},
       ]}
       onPress={() => {
         setValue('repetition', item);

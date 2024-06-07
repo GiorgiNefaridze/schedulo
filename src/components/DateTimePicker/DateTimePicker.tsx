@@ -1,23 +1,23 @@
-import type {Dispatch, SetStateAction} from 'react';
-import {View, Platform, Pressable, Text} from 'react-native';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
-import {UseFormSetValue} from 'react-hook-form';
+import {type Dispatch, type SetStateAction} from 'react';
+import {View, Pressable, Text} from 'react-native';
+import type {Control, FieldErrors, UseFormSetValue} from 'react-hook-form';
+import DatePicker from 'react-native-date-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FormField from '../FormField/FormField';
 
+import FormField from '../FormField/FormField';
 import {useDateTimePicker} from './useDateTimePicker';
-import {getDateFormat} from '../../utils/getDateFormat';
+import {defaultColors} from '../../constants/Colors';
 import {type EventSchema} from '../../models/eventSchema';
 
 import styles from '../BottomSheet/styles';
 
 type DateTimePickerType = {
   label: string;
-  name: string;
-  errors: unknown;
-  control: unknown;
-  openedDate: unknown;
-  setOpenedDate: unknown;
+  name: keyof EventSchema;
+  errors: FieldErrors<EventSchema>;
+  control: Control<EventSchema>;
+  openedDate: string;
+  setOpenedDate: Dispatch<SetStateAction<string>>;
   date: Date;
   setDate: Dispatch<SetStateAction<Date>>;
   setValue: UseFormSetValue<EventSchema>;
@@ -34,55 +34,51 @@ const DateTimePicker = ({
   setDate,
   setValue,
 }: DateTimePickerType) => {
-  const {isVisible, mode} = useDateTimePicker(name, openedDate);
+  const {isVisible, mode, toggleVisibility, handleConfirm} = useDateTimePicker(
+    name,
+    openedDate,
+    setDate,
+    setValue,
+    date,
+  );
 
   return (
     <View>
       <View style={styles.dateContainer}>
         <Text style={styles.fieldBlockText}>{label}: </Text>
         <Pressable
-          onPress={() => setOpenedDate(name)}
-          style={{
-            padding: 10,
-            backgroundColor: isVisible ? '#a3dd38' : 'black',
-            borderRadius: 10,
-          }}>
+          onPress={() => setOpenedDate(prev => (prev === name ? '' : name))}
+          style={[
+            styles.dateIcon,
+            {
+              backgroundColor: isVisible
+                ? defaultColors.light
+                : defaultColors.secondary,
+            },
+          ]}>
           <Icon name="calendar-sharp" size={15} color={'white'} />
         </Pressable>
       </View>
 
-      {isVisible && (
-        <FormField
-          name={name}
-          control={control}
-          error={errors?.name}
-          noLabel
-          Component={() => (
-            <RNDateTimePicker
+      <FormField
+        name={name}
+        control={control}
+        error={errors?.name}
+        hasLabel
+        Component={() => {
+          return (
+            <DatePicker
+              modal
+              open={isVisible}
+              date={date}
               mode={mode}
-              display={Platform.OS === 'android' ? 'default' : 'spinner'}
-              value={date}
-              onChange={date => {
-                const currDate = new Date(
-                  getDateFormat(date.nativeEvent.timestamp),
-                );
-                {
-                  name === 'endDate'
-                    ? setValue('endDate', currDate)
-                    : setValue('startDate', currDate);
-                }
-                setDate(currDate);
-              }}
+              onConfirm={curDate => handleConfirm(curDate)}
+              onCancel={toggleVisibility}
               minimumDate={new Date()}
-              maximumDate={
-                name === 'endDate'
-                  ? new Date(getDateFormat(date, 1))
-                  : undefined
-              }
             />
-          )}
-        />
-      )}
+          );
+        }}
+      />
     </View>
   );
 };

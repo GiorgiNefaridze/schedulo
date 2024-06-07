@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   container: {
     height: 45,
     borderWidth: 1,
-    borderColor: 'grey',
+    borderColor: 'lightgrey',
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',

@@ -1,8 +1,9 @@
-import {getFirstLetterUpper} from '../../utils/getFirstLetterUpper';
+import {type FieldError} from 'react-hook-form';
+import {getFirstUpperLetter} from '../../utils/getFirstUpperLetter';
 
-const useFormField = (name: string, error: string) => {
+const useFormField = (name: string, error: FieldError | undefined) => {
   const isError = Boolean(error?.message);
-  const labelName = getFirstLetterUpper(name);
+  const labelName = getFirstUpperLetter(name);
 
   return {labelName, isError};
 };

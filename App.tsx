@@ -1,16 +1,11 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
+import {LogBox} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 
 import SplashScreen from 'react-native-splash-screen';
-
-import {SafeAreaView, StyleSheet, LogBox} from 'react-native';
-
-import Header from './src/components/Header';
-import BottomSheet from './src/components/BottomSheet';
-import { Calendar } from 'react-native-calendars';
+import TabNavigator from './src/navigators/TabNavigator';
 
 const App = () => {
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
-
   LogBox.ignoreAllLogs();
 
   useEffect(() => {
@@ -18,19 +13,10 @@ const App = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Header setIsSheetOpen={setIsSheetOpen} />
-
-      {isSheetOpen && <BottomSheet />}
-      <Calendar />
-    </SafeAreaView>
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;

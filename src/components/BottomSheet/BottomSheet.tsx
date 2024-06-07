@@ -46,7 +46,7 @@ const BottomSheet = () => {
               name={'name'}
               control={control}
               error={errors.name}
-              noLabel={false}
+              hasLabel={false}
               Component={({field}) => (
                 <TextInput
                   value={field.value}
@@ -109,21 +109,13 @@ const BottomSheet = () => {
                     />
                   )}
                   keyExtractor={item => item}
-                  contentContainerStyle={{
-                    columnGap: 20,
-                    height: 45,
-                  }}
+                  contentContainerStyle={styles.repetitionSection}
                   horizontal
                 />
               )}
             />
 
-            <Pressable
-              style={styles.button}
-              onPress={() => {
-                console.log('cliked');
-                submitForm();
-              }}>
+            <Pressable style={styles.button} onPress={submitForm}>
               <Text style={styles.buttonText}>Submit</Text>
             </Pressable>
           </ScrollView>
