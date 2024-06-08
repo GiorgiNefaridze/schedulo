@@ -1,37 +1,33 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet} from 'react-native';
 
-const {width, height} = Dimensions.get('screen');
+import {defaultColors} from '../../constants/Colors';
 
 const styles = StyleSheet.create({
-  emptyData: {
-    margin: 'auto',
-    width: width - 300,
-    height: height - 500,
-    alignItems: 'center',
-    justifyContent: 'center',
+  container: {
+    flex: 1,
   },
-  knob: {
-    width: 30,
-    height: 6,
-    marginVertical: 5,
-    borderRadius: 30,
-    backgroundColor: 'lightgrey',
-  },
-  eventBlock: {
-    width: width - 150,
-    backgroundColor: 'white',
+  item: {
+    backgroundColor: defaultColors.light,
+    flex: 1,
+    borderRadius: 5,
     padding: 10,
-    marginBottom: 10,
-    marginTop: 20,
-    borderRadius: 6,
+    marginRight: 10,
+    marginTop: 17,
   },
-  eventDay: {
-    width: 100,
-    height: 50,
-    borderColor: 'black',
-    marginTop: 20,
+  customDay: {
+    width: 45,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 10,
+    color: defaultColors.light,
+  },
+  customDayText: {
+    fontSize: 20,
+    color: defaultColors.secondary,
+  },
+  customDayName: {
+    fontSize: 13,
+    color: defaultColors.secondary,
   },
 });
 

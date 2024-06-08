@@ -4,6 +4,7 @@ import {useForm} from 'react-hook-form';
 import {pickPlace} from 'react-native-place-picker';
 
 import {type EventSchema, eventSchema} from '../../models/eventSchema';
+import {createEventDto} from '../../dtos/EventDto';
 import {defaultColors} from '../../constants/Colors';
 
 const snapPoints = ['80%', '95%'];
@@ -25,7 +26,7 @@ const useBottomSheet = () => {
   });
 
   const submitForm = handleSubmit(data => {
-    console.log('Form data: ', data);
+    console.log('Form data: ', createEventDto(data));
   });
 
   const handleOpenMap = () => {
