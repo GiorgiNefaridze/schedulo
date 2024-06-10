@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {View, Text} from 'react-native';
 import {type Control, Controller, type FieldError} from 'react-hook-form';
 
@@ -30,4 +31,4 @@ const FormField = (props: FormFieldType) => {
   );
 };
 
-export default FormField;
+export default memo(FormField);

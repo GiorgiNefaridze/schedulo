@@ -1,12 +1,12 @@
 import {getFirstUpperLetter} from '../utils/getFirstUpperLetter';
 
-const createEventDto = event => {
+const eventDto = event => {
   return {
     ...event,
     name: getFirstUpperLetter(event?.name),
-    startDate: new Date(event?.startDate)?.toLocaleTimeString(),
-    endDate: new Date(event?.endDate)?.toLocaleTimeString(),
+    startDate: event?.startDate?.toLocaleString()?.split(' ')[1],
+    endDate: event?.endDate?.toLocaleString()?.split(' ')[1],
   };
 };
 
-export {createEventDto};
+export {eventDto};

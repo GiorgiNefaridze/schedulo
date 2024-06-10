@@ -18,9 +18,9 @@ type DateTimePickerType = {
   control: Control<EventSchema>;
   openedDate: string;
   setOpenedDate: Dispatch<SetStateAction<string>>;
-  date: Date;
-  setDate: Dispatch<SetStateAction<Date>>;
   setValue: UseFormSetValue<EventSchema>;
+  currentDate: Date;
+  setCurrentDate: Dispatch<SetStateAction<Date>>;
 };
 
 const DateTimePicker = ({
@@ -30,22 +30,21 @@ const DateTimePicker = ({
   errors,
   openedDate,
   setOpenedDate,
-  date,
-  setDate,
   setValue,
+  currentDate,
+  setCurrentDate,
 }: DateTimePickerType) => {
-  const {isVisible, mode, toggleVisibility, handleConfirm} = useDateTimePicker(
-    name,
-    openedDate,
-    setDate,
-    setValue,
-    date,
-  );
+  const {isVisible, toggleVisibility, handleConfirm, selectedDate} =
+    useDateTimePicker(name, openedDate, setValue, setCurrentDate);
 
   return (
     <View>
       <View style={styles.dateContainer}>
-        <Text style={styles.fieldBlockText}>{label}: </Text>
+        <View
+          style={{flexDirection: 'row', alignItems: 'center', columnGap: 10}}>
+          <Text style={styles.fieldBlockText}>{label}: </Text>
+          <Text>{selectedDate}</Text>
+        </View>
         <Pressable
           onPress={() => setOpenedDate(prev => (prev === name ? '' : name))}
           style={[
@@ -60,25 +59,24 @@ const DateTimePicker = ({
         </Pressable>
       </View>
 
-      <FormField
-        name={name}
-        control={control}
-        error={errors?.name}
-        hasLabel
-        Component={() => {
-          return (
+      {isVisible && (
+        <FormField
+          name={name}
+          control={control}
+          error={errors?.name}
+          hasLabel
+          Component={() => (
             <DatePicker
               modal
-              open={isVisible}
-              date={date}
-              mode={mode}
+              open
+              date={currentDate}
+              mode={name === 'endDate' ? 'time' : 'datetime'}
               onConfirm={curDate => handleConfirm(curDate)}
               onCancel={toggleVisibility}
-              minimumDate={new Date()}
             />
-          );
-        }}
-      />
+          )}
+        />
+      )}
     </View>
   );
 };

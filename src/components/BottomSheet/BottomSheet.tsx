@@ -28,11 +28,9 @@ const BottomSheet = () => {
     handleOpenMap,
     openedDate,
     setOpenedDate,
+    setValue,
     currentDate,
     setCurrentDate,
-    maxDate,
-    setMaxDate,
-    setValue,
   } = useBottomSheet();
 
   return (
@@ -64,9 +62,9 @@ const BottomSheet = () => {
               control={control}
               openedDate={openedDate}
               setOpenedDate={setOpenedDate}
-              date={currentDate}
-              setDate={setCurrentDate}
               setValue={setValue}
+              currentDate={currentDate}
+              setCurrentDate={setCurrentDate}
             />
 
             <DateTimePicker
@@ -76,9 +74,9 @@ const BottomSheet = () => {
               control={control}
               openedDate={openedDate}
               setOpenedDate={setOpenedDate}
-              date={maxDate}
-              setDate={setMaxDate}
               setValue={setValue}
+              currentDate={currentDate}
+              setCurrentDate={setCurrentDate}
             />
 
             <FormField

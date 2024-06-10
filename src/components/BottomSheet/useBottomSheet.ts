@@ -4,17 +4,19 @@ import {useForm} from 'react-hook-form';
 import {pickPlace} from 'react-native-place-picker';
 
 import {type EventSchema, eventSchema} from '../../models/eventSchema';
-import {createEventDto} from '../../dtos/EventDto';
+import {eventDto} from '../../dtos/EventDto';
+import {EventsContext} from '../../contexts/EventsContext';
 import {defaultColors} from '../../constants/Colors';
+import {formatDate} from '../../utils/formatDate';
 
 const snapPoints = ['80%', '95%'];
 
 const useBottomSheet = () => {
   const [isSelected, setIsSelected] = useState('');
   const [openedDate, setOpenedDate] = useState('');
-
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [maxDate, setMaxDate] = useState(new Date());
+
+  const {setEvents, events} = EventsContext();
 
   const {
     control,
@@ -26,7 +28,14 @@ const useBottomSheet = () => {
   });
 
   const submitForm = handleSubmit(data => {
-    console.log('Form data: ', createEventDto(data));
+    const eventKey = formatDate(
+      data?.startDate?.toLocaleString()?.split(',')[0].replaceAll('/', '-'),
+    );
+
+    setEvents(prev => ({
+      ...prev,
+      [eventKey]: [...(events[eventKey] || []), eventDto(data)],
+    }));
   });
 
   const handleOpenMap = () => {
@@ -39,6 +48,7 @@ const useBottomSheet = () => {
         setValue('location', {
           latitude: res?.coordinate.latitude,
           longitude: res?.coordinate?.longitude,
+          city: res.address?.city,
         }),
       )
       .catch(console.log);
@@ -57,8 +67,6 @@ const useBottomSheet = () => {
     setOpenedDate,
     currentDate,
     setCurrentDate,
-    maxDate,
-    setMaxDate,
   };
 };
 

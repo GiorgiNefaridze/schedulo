@@ -1,4 +1,4 @@
-import {useState, useEffect, Dispatch, SetStateAction} from 'react';
+import {useState, useEffect} from 'react';
 import {type UseFormSetValue} from 'react-hook-form';
 
 import {type EventSchema} from '../../models/eventSchema';
@@ -6,33 +6,39 @@ import {type EventSchema} from '../../models/eventSchema';
 const useDateTimePicker = (
   name: keyof EventSchema,
   openedDate: string,
-  setDate: Dispatch<SetStateAction<Date>>,
   setValue: UseFormSetValue<EventSchema>,
-  date: Date,
+  setCurrentDate: any,
 ) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedDate, setSelectedDate] = useState('');
 
   useEffect(() => {
     setIsVisible(name === openedDate);
-    if (name === 'endDate') {
-      setValue('endDate', date);
-    } else {
-      setValue('startDate', date);
-    }
   }, [name, openedDate]);
-
-  const mode = name === 'endDate' ? 'time' : 'datetime';
 
   const toggleVisibility = () => {
     setIsVisible(prev => !prev);
   };
 
-  const handleConfirm = date => {
-    setDate(date);
+  const handleConfirm = datetime => {
+    const time = datetime?.toLocaleString()?.split(' ')[1];
+    const date = datetime?.toLocaleString()?.split(',')[0];
+
+    const displayDate = time + '-' + date;
     setIsVisible(false);
+
+    if (name === 'endDate') {
+      setValue('endDate', datetime);
+    } else {
+      setValue('startDate', datetime);
+    }
+
+    setCurrentDate(datetime);
+
+    setSelectedDate(displayDate);
   };
 
-  return {isVisible, mode, toggleVisibility, handleConfirm};
+  return {isVisible, toggleVisibility, handleConfirm, selectedDate};
 };
 
 export {useDateTimePicker};

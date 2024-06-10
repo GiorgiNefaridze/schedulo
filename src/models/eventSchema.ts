@@ -7,10 +7,11 @@ const eventSchema = z.object({
   location: z.object({
     latitude: z.number(),
     longitude: z.number(),
+    city: z.string().optional(),
   }),
-  startDate: z.date(),
-  endDate: z.date(),
-  repetition: z.enum(REPETITION).default(''),
+  startDate: z.any(),
+  endDate: z.any(),
+  repetition: z.enum(REPETITION).default('').optional(),
 });
 
 type EventSchema = z.infer<typeof eventSchema>;
