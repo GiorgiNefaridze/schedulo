@@ -13,6 +13,11 @@
       android:theme="@style/AppTheme">
 
       <meta-data
+          android:name="com.google.firebase.messaging.channelId"
+          android:value="@string/channelId"
+          tools:replace="android:value" />
+
+      <meta-data
       android:name="com.google.android.geo.API_KEY"
       android:value="AIzaSyAsvdsDP28lc9oAGDMzbD928hB2LOX-eQY" />
       

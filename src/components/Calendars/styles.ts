@@ -12,9 +12,9 @@ const styles = StyleSheet.create({
     columnGap: 5,
   },
   item: {
-    backgroundColor: defaultColors.light,
     flex: 1,
-    height: 100,
+    height: 130,
+    backgroundColor: defaultColors.light,
     borderRadius: 5,
     padding: 10,
     marginRight: 10,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   eventFlag: {
     width: 5,
-    height: 100,
+    height: 130,
     backgroundColor: '#61b3f2',
     position: 'absolute',
     left: 0,

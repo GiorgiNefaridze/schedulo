@@ -1,4 +1,3 @@
-import {memo} from 'react';
 import {SafeAreaView} from 'react-native';
 import {Agenda} from 'react-native-calendars';
 
@@ -22,4 +21,4 @@ const Calendar = () => {
   );
 };
 
-export default memo(Calendar);
+export default Calendar;

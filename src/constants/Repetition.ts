@@ -1,5 +1,5 @@
 import {type Repetition} from '../types/Repetition/Repetition';
 
-const REPETITION: Repetition[] = ['day', 'week', 'month'];
+const REPETITION: Repetition[] = ['hour', 'day', 'week'];
 
 export {REPETITION};

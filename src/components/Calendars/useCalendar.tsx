@@ -22,21 +22,23 @@ const useCalendar = () => {
           {reservation.name}
         </Text>
         <View style={styles.itemBlock}>
-          <Icon name="alarm-outline" size={13} color={'black'} />
+          <Icon name="alarm-outline" size={15} color={'black'} />
           <Text style={{fontSize, color, fontWeight: '600'}}>
             {reservation.startDate} - {reservation.endDate}
           </Text>
         </View>
         <View style={styles.itemBlock}>
-          <Icon name="location" size={13} color={'black'} />
+          <Icon name="location" size={15} color={'black'} />
           <Text style={{fontSize, color, fontWeight: '600'}}>
-            {reservation.location.city}
+            {reservation.location.city ?? 'Not selected'}
           </Text>
         </View>
         {!!reservation.repetition && (
           <View style={styles.itemBlock}>
-            <Icon name="sync-outline" size={12} color={'black'} />
-            <Text>Every - {reservation.repetition}</Text>
+            <Icon name="refresh-circle-sharp" size={15} color={'black'} />
+            <Text style={{fontWeight: '600'}}>
+              Every - {reservation.repetition}
+            </Text>
           </View>
         )}
       </TouchableOpacity>

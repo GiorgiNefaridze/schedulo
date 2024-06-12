@@ -1,3 +1,3 @@
-type Repetition = 'day' | 'week' | 'month';
+type Repetition = 'day' | 'week' | 'hour';
 
 export {type Repetition};
