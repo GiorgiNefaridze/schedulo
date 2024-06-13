@@ -31,8 +31,9 @@ const CreateScheduledNotification = () => {
     day,
     repetition,
   }: TriggerNotificationType) => {
-    const date = new Date(Date.now());
+    await notifee.requestPermission();
 
+    const date = new Date(Date.now());
     date.setHours(hour);
     date.setMinutes(minute);
     date.setFullYear(year, month, day);

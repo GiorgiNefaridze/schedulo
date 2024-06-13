@@ -22,7 +22,7 @@ const RepetitionBox = ({
   setIsSelected,
   setValue,
 }: RepetitionBoxType) => {
-  const {itemName, isChoosen} = useRepetitionBox(item, isSelected);
+  const {itemName, isChoosen} = useRepetitionBox(item, isSelected, setValue);
 
   return (
     <Pressable
@@ -31,8 +31,7 @@ const RepetitionBox = ({
         {backgroundColor: isChoosen ? defaultColors.light : 'white'},
       ]}
       onPress={() => {
-        setValue('repetition', item);
-        setIsSelected(item);
+        setIsSelected(prev => (prev === item ? '' : item));
       }}>
       <Text
         style={[styles.containerText, {color: isChoosen ? 'white' : 'black'}]}>

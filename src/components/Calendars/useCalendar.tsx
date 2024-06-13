@@ -3,15 +3,18 @@ import {Alert, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {EventsContext} from '../../contexts/EventsContext';
+import {type Event} from '../../types/Event/Event';
 
 import styles from './styles';
 
 const useCalendar = () => {
   const {events} = EventsContext();
 
-  const renderItem = useCallback((reservation, isFirst: boolean) => {
+  const renderItem = useCallback((reservation: Event, isFirst: boolean) => {
     const fontSize = isFirst ? 16 : 14;
     const color = 'black';
+    const startTime = reservation.startDate.split(':').slice(0, 2).join(':');
+    const endTime = reservation.endDate.split(':').slice(0, 2).join(':');
 
     return (
       <TouchableOpacity
@@ -24,7 +27,7 @@ const useCalendar = () => {
         <View style={styles.itemBlock}>
           <Icon name="alarm-outline" size={15} color={'black'} />
           <Text style={{fontSize, color, fontWeight: '600'}}>
-            {reservation.startDate} - {reservation.endDate}
+            {startTime} - {endTime}
           </Text>
         </View>
         <View style={styles.itemBlock}>

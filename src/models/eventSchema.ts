@@ -11,7 +11,7 @@ const eventSchema = z.object({
   }),
   startDate: z.any().refine(e => Boolean(e), {message: 'Required'}),
   endDate: z.any().refine(e => Boolean(e), {message: 'Required'}),
-  repetition: z.enum(REPETITION).default('').optional(),
+  repetition: z.enum(['', ...REPETITION]).default(''),
 });
 
 type EventSchema = z.infer<typeof eventSchema>;
