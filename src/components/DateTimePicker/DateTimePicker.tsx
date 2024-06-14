@@ -59,24 +59,23 @@ const DateTimePicker = ({
         </Pressable>
       </View>
 
-      {isVisible && (
-        <FormField
-          name={name}
-          control={control}
-          error={errors?.name}
-          hasLabel
-          Component={() => (
-            <DatePicker
-              modal
-              open
-              date={currentDate}
-              mode={name === 'endDate' ? 'time' : 'datetime'}
-              onConfirm={curDate => handleConfirm(curDate)}
-              onCancel={toggleVisibility}
-            />
-          )}
-        />
-      )}
+      <FormField
+        name={name}
+        control={control}
+        error={name === 'endDate' ? errors.endDate : errors.startDate}
+        hasLabel
+        Component={() => (
+          <DatePicker
+            modal
+            open={isVisible}
+            date={currentDate}
+            mode={name === 'endDate' ? 'time' : 'datetime'}
+            onConfirm={curDate => handleConfirm(curDate)}
+            onCancel={toggleVisibility}
+            minimumDate={new Date()}
+          />
+        )}
+      />
     </View>
   );
 };

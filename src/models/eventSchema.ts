@@ -9,8 +9,8 @@ const eventSchema = z.object({
     longitude: z.number(),
     city: z.string().optional(),
   }),
-  startDate: z.any().refine(e => Boolean(e), {message: 'Required'}),
-  endDate: z.any().refine(e => Boolean(e), {message: 'Required'}),
+  startDate: z.any().refine(e => Boolean(e), 'Start date is required'),
+  endDate: z.any().refine(e => Boolean(e), 'End date isRequired'),
   repetition: z.enum(['', ...REPETITION]).default(''),
 });
 
