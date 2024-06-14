@@ -39,15 +39,12 @@ const CreateScheduledNotification = () => {
     date.setFullYear(year, month, day);
 
     const channelId = await notifee.createChannel({
-      id: 'default',
+      id: 'defaultId',
       name: 'Default Channel',
       importance: AndroidImportance.HIGH,
     });
 
     const trigger: TimestampTrigger = {
-      alarmManager: {
-        allowWhileIdle: true,
-      },
       type: TriggerType.TIMESTAMP,
       repeatFrequency: transformRepeatFrequency(repetition),
       timestamp: date.getTime(),

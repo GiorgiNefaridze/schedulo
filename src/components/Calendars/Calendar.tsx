@@ -6,7 +6,7 @@ import {useCalendar} from './useCalendar';
 import styles from './styles';
 
 const Calendar = () => {
-  const {renderItem, renderDay, events} = useCalendar();
+  const {renderItem, renderDay, renderEmptyData, events} = useCalendar();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -15,6 +15,7 @@ const Calendar = () => {
         loadItemsForMonth={() => {}}
         renderItem={renderItem}
         renderDay={renderDay}
+        renderEmptyData={renderEmptyData}
         showClosingKnob={true}
       />
     </SafeAreaView>

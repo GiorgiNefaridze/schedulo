@@ -1,10 +1,11 @@
 import {useCallback} from 'react';
-import {Alert, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {EventsContext} from '../../contexts/EventsContext';
 import {type Event} from '../../types/Event/Event';
 
+import EmptyData from '../../assets/emptyData.webp';
 import styles from './styles';
 
 const useCalendar = () => {
@@ -63,7 +64,15 @@ const useCalendar = () => {
     return <View style={styles.customDay} />;
   }, []);
 
-  return {renderItem, renderDay, events};
+  const renderEmptyData = useCallback(() => {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <Image style={{width: 150, height: 150}} source={EmptyData} />
+      </View>
+    );
+  }, []);
+
+  return {renderItem, renderDay, renderEmptyData, events};
 };
 
 export {useCalendar};

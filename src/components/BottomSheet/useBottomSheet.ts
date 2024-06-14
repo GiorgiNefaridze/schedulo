@@ -37,11 +37,11 @@ const useBottomSheet = () => {
     );
 
     onCreateTriggerNotification(TriggerNotificationDto(data));
-
     setEvents(prev => ({
       ...prev,
       [eventKey]: [...(events[eventKey] || []), eventDto(data)],
     }));
+
     reset();
   });
 
