@@ -1,4 +1,5 @@
 import {
+  useEffect,
   type ReactNode,
   createContext,
   useContext,
@@ -8,6 +9,7 @@ import {
 } from 'react';
 
 import {type EventType} from '../types/Event/Event';
+import {getEvents} from '../store/store';
 
 const eventsContext = createContext<EventsContextType>({} as EventsContextType);
 
@@ -22,6 +24,12 @@ const EventsContext = () => {
 
 const EventsContextProvider = ({children}: {children: ReactNode}) => {
   const [events, setEvents] = useState({});
+
+  const allEvents = getEvents();
+
+  useEffect(() => {
+    setEvents(allEvents);
+  }, []);
 
   return (
     <eventsContext.Provider value={{events, setEvents}}>
