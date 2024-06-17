@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     height: 130,
-    backgroundColor: defaultColors.light,
     borderRadius: 5,
     padding: 10,
     marginRight: 10,
